@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jubair – Creative Developer</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome for icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --bg-color: #0e1117;
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --accent: #3b82f6;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.1);
+      --font-main: 'Inter', sans-serif;
+      --font-alt: 'Orbitron', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg-color);
+      font-family: var(--font-main);
+      color: var(--text-main);
+      padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      max-width: 1000px;
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      backdrop-filter: blur(14px);
+      padding: 3rem;
+      display: flex;
+      flex-direction: row;
+      gap: 2.5rem;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    .left {
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .left img {
+      width: 100%;
+      border-radius: 20px;
+      border: 2px solid var(--border);
+    }
+
+    .right {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .name {
+      font-size: 2.5rem;
+      font-family: var(--font-alt);
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .title {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .bio {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #2563eb;
+    }
+
+    .btn-outline {
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    .socials {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .socials a {
+      color: var(--text-muted);
+      font-size: 1.3rem;
+      transition: 0.3s ease;
+    }
+
+    .socials a:hover {
+      color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    .skills {
+      margin-top: 2rem;
+    }
+
+    .skills h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .skill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: 0.2s ease;
+    }
+
+    .skill:hover {
+      color: white;
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .socials {
+        justify-content: center;
+      }
+
+      .buttons {
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .left {
+        max-width: 80%;
+        margin: 0 auto;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="left">
+      <img src="88.jpg" alt="Jubair Profile" />
+    </div>
+
+    <div class="right">
+      <div>
+        <div class="name">Jubair</div>
+        <div class="title">Creative Developer • Voice Artist • Game Designer</div>
+        <div class="bio">
+          I'm a passionate creative who blends storytelling, code, and interactive experiences into expressive digital works. Whether it's designing nostalgic games, automating with AI agents, or voicing engaging scripts, I aim to build with depth and emotion.
+        </div>
+
+        <div class="buttons">
+          <a href="#" class="btn btn-primary">Download Resume</a>
+          <a href="#contact" class="btn btn-outline">Contact Me</a>
+        </div>
+
+        <div class="socials">
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+
+      <div class="skills">
+        <h3>Tech Stack</h3>
+        <div class="skill-list">
+          <span class="skill">JavaScript</span>
+          <span class="skill">React</span>
+          <span class="skill">Tailwind CSS</span>
+          <span class="skill">Python</span>
+          <span class="skill">Django</span>
+          <span class="skill">AI Agents</span>
+          <span class="skill">Content Writing</span>
+          <span class="skill">Voice Over</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
