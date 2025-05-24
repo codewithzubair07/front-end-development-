@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Professional To-Do List</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display&display=swap" rel="stylesheet" />
+
+<style>
+  /* Reset */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    background: #f7f9fc;
+    color: #333;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 3rem 1rem 4rem;
+    user-select: none;
+  }
+
+  .todo-container {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 2.5rem 3rem;
+    max-width: 460px;
+    width: 100%;
+    box-shadow: 0 8px 24px rgba(100, 100, 120, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 2.4rem;
+    margin-bottom: 0;
+    letter-spacing: 1.2px;
+    text-align: center;
+    color: #222;
+  }
+
+  form {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.6rem;
+  }
+
+  input[type="text"] {
+    flex-grow: 1;
+    padding: 0.85rem 1.2rem;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    border: 1.8px solid #cfd8dc;
+    outline: none;
+    background: #fafafa;
+    color: #333;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+  input[type="text"]::placeholder {
+    color: #a3aab3;
+  }
+  input[type="text"]:focus {
+    border-color: #3b82f6; /* nice blue */
+    background-color: #ffffff;
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+  }
+  input.shake {
+    animation: shake 0.3s ease;
+    border-color: #f87171;
+    background-color: #ffefef;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25%, 75% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+  }
+
+  button {
+    background: #3b82f6;
+    border: none;
+    border-radius: 10px;
+    padding: 0 1.8rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 5px 0 #2563eb;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  button:hover {
+    background-color: #2563eb;
+    box-shadow: 0 7px 10px rgba(37, 99, 235, 0.4);
+    transform: translateY(-2px);
+  }
+  button:active {
+    box-shadow: none;
+    transform: translateY(1px);
+  }
+
+  ul.todo-list {
+    list-style: none;
+    padding-left: 0;
+    max-height: 320px;
+    overflow-y: auto;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  ul.todo-list li {
+    background: #f0f4f8;
+    padding: 0.85rem 1.4rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  ul.todo-list li:hover {
+    background-color: #dbeafe;
+  }
+
+  ul.todo-list li.completed {
+    color: #6b7280;
+    text-decoration: line-through;
+    opacity: 0.7;
+  }
+  ul.todo-list li.completed:hover {
+    background-color: #cbd5e1;
+  }
+
+  ul.todo-list li button.delete-btn {
+    background: transparent;
+    border: none;
+    color: #ef4444;
+    font-size: 1.4rem;
+    cursor: pointer;
+    font-weight: 700;
+    transition: color 0.25s ease;
+  }
+  ul.todo-list li button.delete-btn:hover {
+    color: #b91c1c;
+  }
+
+  ul.todo-list::-webkit-scrollbar {
+    width: 7px;
+  }
+  ul.todo-list::-webkit-scrollbar-track {
+    background: #f0f4f8;
+  }
+  ul.todo-list::-webkit-scrollbar-thumb {
+    background-color: #93c5fd;
+    border-radius: 4px;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-top: 0.3rem;
+  }
+
+  .controls .count {
+    user-select: none;
+  }
+
+  .controls .actions button {
+    background: transparent;
+    color: #3b82f6;
+    border: 1.6px solid #3b82f6;
+    padding: 0.4rem 1rem;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    user-select: none;
+    margin-left: 0.7rem;
+  }
+  .controls .actions button:hover {
+    background: #3b82f6;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(59,130,246,0.5);
+  }
+  .controls .actions button:active {
+    transform: translateY(1px);
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .todo-container {
+      padding: 2rem 2rem;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <main class="todo-container" role="main" aria-label="Professional To-do list application">
+    <h1>My To-Do List</h1>
+
+    <form id="todoForm" aria-label="Add a new task" novalidate>
+      <input
+        type="text"
+        id="taskInput"
+        placeholder="Add a new task..."
+        aria-required="true"
+        aria-label="Task input"
+        autocomplete="off"
+        required
+      />
+      <button type="submit" aria-label="Add task">Add</button>
+    </form>
+
+    <ul class="todo-list" id="todoList" aria-live="polite" aria-relevant="additions removals"></ul>
+
+    <div class="controls" aria-live="polite">
+      <div class="count" id="taskCount">0 tasks remaining</div>
+      <div class="actions">
+        <button id="clearCompleted" aria-label="Remove all completed tasks">Clear Completed</button>
+        <button id="clearAll" aria-label="Remove all tasks">Clear All</button>
+      </div>
+    </div>
+  </main>
+
+<script>
+  const todoForm = document.getElementById('todoForm');
+  const taskInput = document.getElementById('taskInput');
+  const todoList = document.getElementById('todoList');
+  const taskCount = document.getElementById('taskCount');
+  const clearCompletedBtn = document.getElementById('clearCompleted');
+  const clearAllBtn = document.getElementById('clearAll');
+
+  function updateCount() {
+    const totalTasks = todoList.children.length;
+    const remainingTasks = Array.from(todoList.children).filter(li => !li.classList.contains('completed')).length;
+    taskCount.textContent = `${remainingTasks} task${remainingTasks !== 1 ? 's' : ''} remaining of ${totalTasks}`;
+  }
+
+  function createTask(text) {
+    const li = document.createElement('li');
+    li.textContent = text;
+    li.tabIndex = 0;
+    li.setAttribute('role', 'checkbox');
+    li.setAttribute('aria-checked', 'false');
+
+    li.addEventListener('click', () => toggleComplete(li));
+    li.addEventListener('keydown', e => {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        toggleComplete(li);
+      }
+    });
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = '×';
+    deleteBtn.classList.add('delete-btn');
+    deleteBtn.setAttribute('aria-label', `Delete task: ${text}`);
+    deleteBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      todoList.removeChild(li);
+      updateCount();
+    });
+
+    li.appendChild(deleteBtn);
+
+    return li;
+  }
+
+  function toggleComplete(item) {
+    const isCompleted = item.classList.toggle('completed');
+    item.setAttribute('aria-checked', isCompleted);
+    updateCount();
+  }
+
+  todoForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const text = taskInput.value.trim();
+    if (!text) {
+      taskInput.classList.add('shake');
+      setTimeout(() => taskInput.classList.remove('shake'), 300);
+      taskInput.focus();
+      return;
+    }
+    const newTask = createTask(text);
+    todoList.appendChild(newTask);
+    taskInput.value = '';
+    taskInput.focus();
+    updateCount();
+  });
+
+  clearCompletedBtn.addEventListener('click', () => {
+    const completedTasks = Array.from(todoList.children).filter(li => li.classList.contains('completed'));
+    completedTasks.forEach(li => todoList.removeChild(li));
+    updateCount();
+  });
+
+  clearAllBtn.addEventListener('click', () => {
+    todoList.innerHTML = '';
+    updateCount();
+  });
+
+  updateCount();
+</script>
+
+</body>
+</html>
